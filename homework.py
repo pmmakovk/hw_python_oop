@@ -4,7 +4,7 @@ from dataclasses import dataclass
 @dataclass
 class InfoMessage:
     """Информационное сообщение о тренировке."""
-    MESSAGE = ('Тип тренировки: {training_type}; ' 
+    MESSAGE = ('Тип тренировки: {training_type}; '
                'Длительность: {duration_h:.3f} ч.; '
                'Дистанция: {distance:.3f} км; Ср. скорость: {speed:.3f} км/ч; '
                'Потрачено ккал: {calories:.3f}.')
