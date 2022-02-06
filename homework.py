@@ -1,9 +1,11 @@
 from dataclasses import dataclass
 
+
 @dataclass
 class InfoMessage:
     """Информационное сообщение о тренировке."""
-    MESSAGE = ('Тип тренировки: {training_type}; Длительность: {duration_h:.3f} ч.; '
+    MESSAGE = ('Тип тренировки: {training_type}; ' 
+               'Длительность: {duration_h:.3f} ч.; '
                'Дистанция: {distance:.3f} км; Ср. скорость: {speed:.3f} км/ч; '
                'Потрачено ккал: {calories:.3f}.')
 
@@ -21,7 +23,7 @@ class InfoMessage:
         data_5 = self.calories
         return self.MESSAGE.format(training_type=data_1, duration_h=data_2,
                                    distance=data_3, speed=data_4,
-                                   calories=data_5)    
+                                   calories=data_5)
 
 
 @dataclass
@@ -63,11 +65,12 @@ class Training:
 class Running(Training):
     """Тренировка: бег."""
     CAL_COEFF_1 = 18
-    CAL_COEFF_2 =20
+    CAL_COEFF_2 = 20
 
     def get_spent_calories(self) -> float:
-        calories = ((self.CAL_COEFF_1 * self.get_mean_speed() - self.CAL_COEFF_2)
-                    * self.weight / self.M_IN_KM * (self.TIME_COEFF * self.duration_h))
+        calories = ((self.CAL_COEFF_1 * self.get_mean_speed()
+                    - self.CAL_COEFF_2) * self.weight / self.M_IN_KM
+                    * (self.TIME_COEFF * self.duration_h))
         return calories
 
 
@@ -76,13 +79,14 @@ class SportsWalking(Training):
     """Тренировка: спортивная ходьба."""
     CAL_COEFF_3 = 0.035
     CAL_COEFF_4 = 0.029
-    
+
     height: float
 
     def get_spent_calories(self) -> float:
-        calories = (self.CAL_COEFF_3 * self.weight
+        calories = ((self.CAL_COEFF_3 * self.weight
                     + (self.get_mean_speed()**2 // self.height)
-                    * self.CAL_COEFF_4 * self.weight) * (self.TIME_COEFF * self.duration_h)
+                    * self.CAL_COEFF_4 * self.weight)
+                    * (self.TIME_COEFF * self.duration_h))
         return calories
 
 
@@ -92,7 +96,7 @@ class Swimming(Training):
 
     LEN_STEP = 1.38
     CAL_COEFF_5 = 1.1
-    
+
     length_pool: float
     count_pool: float
 
