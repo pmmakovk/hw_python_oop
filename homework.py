@@ -32,9 +32,9 @@ class Training:
     LEN_STEP: ClassVar[float] = 0.65
     TIME_COEFF: ClassVar[int] = 60
 
-    action: int 
-    duration: float 
-    weight: float 
+    action: int
+    duration: float
+    weight: float
 
     def get_distance(self) -> float:
         """Получить дистанцию в км."""
