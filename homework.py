@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import ClassVar
 
 
 @dataclass
@@ -16,27 +17,24 @@ class InfoMessage:
     calories: float
 
     def get_message(self) -> str:
-        data_1 = self.training_type
-        data_2 = self.duration
-        data_3 = self.distance
-        data_4 = self.speed
-        data_5 = self.calories
-        return self.MESSAGE.format(training_type=data_1, duration=data_2,
-                                   distance=data_3, speed=data_4,
-                                   calories=data_5)
+        return self.MESSAGE.format(training_type=self.training_type,
+                                   duration=self.duration,
+                                   distance=self.distance,
+                                   speed=self.speed,
+                                   calories=self.calories)
 
 
 @dataclass
 class Training:
     """Базовый класс тренировки."""
 
-    M_IN_KM = 1000
-    LEN_STEP = 0.65
-    TIME_COEFF = 60
+    M_IN_KM: ClassVar[int] = 1000
+    LEN_STEP: ClassVar[float] = 0.65
+    TIME_COEFF: ClassVar[int] = 60
 
-    action: int
-    duration: float
-    weight: float
+    action: int 
+    duration: float 
+    weight: float 
 
     def get_distance(self) -> float:
         """Получить дистанцию в км."""
@@ -64,8 +62,8 @@ class Training:
 
 class Running(Training):
     """Тренировка: бег."""
-    CAL_COEFF_1 = 18
-    CAL_COEFF_2 = 20
+    CAL_COEFF_1: ClassVar[int] = 18
+    CAL_COEFF_2: ClassVar[int] = 20
 
     def get_spent_calories(self) -> float:
         calories = ((self.CAL_COEFF_1 * self.get_mean_speed()
@@ -77,8 +75,8 @@ class Running(Training):
 @dataclass
 class SportsWalking(Training):
     """Тренировка: спортивная ходьба."""
-    CAL_COEFF_3 = 0.035
-    CAL_COEFF_4 = 0.029
+    CAL_COEFF_3: ClassVar[float] = 0.035
+    CAL_COEFF_4: ClassVar[float] = 0.029
 
     height: float
 
@@ -94,8 +92,8 @@ class SportsWalking(Training):
 class Swimming(Training):
     """Тренировка: плавание."""
 
-    LEN_STEP = 1.38
-    CAL_COEFF_5 = 1.1
+    LEN_STEP: ClassVar[float] = 1.38
+    CAL_COEFF_5: ClassVar[float] = 1.1
 
     length_pool: float
     count_pool: float
